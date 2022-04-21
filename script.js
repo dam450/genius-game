@@ -58,7 +58,7 @@ let checkOrder = () => {
   }
   if (clickedOrder.length == order.length) {
     score++;
-    alert(`Pontuação: [ ${score} ]\n\nVocê acertou! \nClique me OK para próxima rodada.`);
+    alert(`Pontuação: [ ${score} ]\n\nVocê acertou! \nClique em OK para próxima rodada.`);
     nextLevel();
   }
 }
