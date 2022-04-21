@@ -4,18 +4,20 @@ let order = [];
 let clickedOrder = [];
 let score = 0;
 
-const GREEN = 0; //0 - verde
-const RED = 1; //1 - vermelho
+// indice de identificação das cores por valor numérico
+const GREEN = 0;  //0 - verde
+const RED = 1;    //1 - vermelho
 const YELLOW = 2; //2 - amarelo
-const BLUE = 3; //3 - azul
+const BLUE = 3;   //3 - azul
 
+// Identificação dos elementos Div de cada cor do jogo
 const blue = document.querySelector('.blue');
 const red = document.querySelector('.red');
 const yellow = document.querySelector('.yellow');
 const green = document.querySelector('.green');
 
 /**
- * Cria ordem aleatória de cores
+ * Função que gera a ordem aleatória de cores
  */
 let shuffleOrder = () => {
   let colorOrder = Math.floor(Math.random() * 4);
@@ -29,9 +31,9 @@ let shuffleOrder = () => {
 }
 
 /**
- * Acende a próxima cor
- * @param {HTMLDivElement} element cor do elemento aceso
- * @param {Float} time tempo aceso
+ * Acende a cor do elemento informado após atraso definido.
+ * @param {HTMLDivElement} element Cor do elemento a acender
+ * @param {Float} time Tempo de atraso para acender
  */
 let lightColor = (element, time) => {
   time = time * 500;
@@ -46,8 +48,8 @@ let lightColor = (element, time) => {
 }
 
 /**
- * Checa se os botões clicados são os mesmos da
- * ordem gerada no jogo.
+ * Checa se os botões foram clicados na mesma
+ * ordem gerada na função shuffleOrder().
  */
 let checkOrder = () => {
   for (let i in clickedOrder) {
@@ -64,8 +66,8 @@ let checkOrder = () => {
 }
 
 /**
- * Função para click do usuário
- * @param {*} color 
+ * Função de click do usuário
+ * @param {Integer} color valor inteiro do indice da cor clicada
  */
 let click = (color) => {
   clickedOrder[clickedOrder.length] = color;
@@ -81,8 +83,8 @@ let click = (color) => {
 
 /**
  * Função que retorna o elemento da cor do argumento informado
- * @param {Integer} color 
- * @returns HTMLDivElement
+ * @param {Integer} color Valor inteiro com indice da cor
+ * @returns HTMLDivElement (Div da cor informada)
  */
 let createColorElement = (color) => {
   if (color == GREEN) {
@@ -120,19 +122,19 @@ let gameOver = () => {
  */
 let playGame = () => {
 
-  alert('Bem vindo ao Gênesis! iniciando o jogo!')
+  alert('Bem vindo ao Genius! \niniciando o jogo!')
   score = 0;
 
   nextLevel();
 }
 
 /**
- * eventos de clique para as cores
+ * eventos de clique dos botões de cada cor
  */
 green.onclick = () => click(GREEN);
 red.onclick = () => click(RED);
 yellow.onclick = () => click(YELLOW);
 blue.onclick = () => click(BLUE);
 
-// Inicio do jogo
+// Inicia o jogo
 playGame();
