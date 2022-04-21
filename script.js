@@ -1,6 +1,4 @@
-/**
- * Genius Game
- */
+// Genius Game
 
 let order = [];
 let clickedOrder = [];
@@ -32,18 +30,19 @@ let shuffleOrder = () => {
 
 /**
  * Acende a próxima cor
- * @param {*} element 
- * @param {*} number 
+ * @param {HTMLDivElement} element cor do elemento aceso
+ * @param {Float} time tempo aceso
  */
-let lightColor = (element, number) => {
+let lightColor = (element, time) => {
   time = time * 500;
+
   setTimeout(() => {
     element.classList.add('selected');
-  }, tempo - 250);
+  }, time - 250);
 
   setTimeout(() => {
     element.classList.remove('selected');
-  });
+  }, time);
 }
 
 /**
@@ -53,12 +52,13 @@ let lightColor = (element, number) => {
 let checkOrder = () => {
   for (let i in clickedOrder) {
     if (clickedOrder[i] != order[i]) {
-      lose();
+      gameOver();
       break;
     }
   }
   if (clickedOrder.length == order.length) {
-    alert(`pontuação: ${score}\nVocê acertou! iniciando próximo nível`);
+    score++;
+    alert(`Pontuação: [ ${score} ]\n\nVocê acertou! \nClique me OK para próxima rodada.`);
     nextLevel();
   }
 }
@@ -73,14 +73,15 @@ let click = (color) => {
 
   setTimeout(() => {
     createColorElement(color).classList.remove('selected');
-  });
+    checkOrder();
+  }, 250);
 
-  checkOrder();
+
 }
 
 /**
- * Função que retorna elemento da cor do argumento informado
- * @param {*} color 
+ * Função que retorna o elemento da cor do argumento informado
+ * @param {Integer} color 
  * @returns HTMLDivElement
  */
 let createColorElement = (color) => {
@@ -99,6 +100,39 @@ let createColorElement = (color) => {
  * função para chamar próximo nível do jogo. 
  */
 let nextLevel = () => {
-  score++;
   shuffleOrder();
 }
+
+/**
+ * Função game over. 
+ * Encerra o jogo e mostra a pontuação.
+ */
+let gameOver = () => {
+  alert(`< FIM DE JOGO >\n\nPontuação: [ ${score} ].\n\nVocê perdeu!\nClique em OK para recomeçar.`);
+  order = [];
+  clickedOrder = [];
+
+  playGame();
+}
+
+/**
+ * Função que inicia o jogo.
+ */
+let playGame = () => {
+
+  alert('Bem vindo ao Gênesis! iniciando o jogo!')
+  score = 0;
+
+  nextLevel();
+}
+
+/**
+ * eventos de clique para as cores
+ */
+green.onclick = () => click(GREEN);
+red.onclick = () => click(RED);
+yellow.onclick = () => click(YELLOW);
+blue.onclick = () => click(BLUE);
+
+// Inicio do jogo
+playGame();
